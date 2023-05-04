@@ -12,6 +12,7 @@ const Display = () => {
             <p>{value.item}</p>
             <p>{value.expense}</p>
             <button onClick={() => data.handleDelete(value.id)}>Delete</button>
+            <button onClick={() => data.handleUpdate(value.id)}>Update</button>
           </div>
         );
       })}
