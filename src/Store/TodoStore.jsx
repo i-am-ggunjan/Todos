@@ -8,13 +8,13 @@ const TodoStore = (props) => {
   let [todo, setTodo] = useState([
     {
       id: 1,
-      item: "No Item",
-      expense: 0,
+      title: "No title",
+      description: "No Description",
     },
   ]);
 
-  let [itemRefStore, setItemRefStore] = useState();
-  let [expenseRefStore, setExpenseRefStore] = useState();
+  let [titleRefStore, setTitleRefStore] = useState();
+  let [descriptionRefStore, setDescriptionRefStore] = useState();
 
   let [id, setId] = useState(1);
 
@@ -23,19 +23,18 @@ const TodoStore = (props) => {
   }, [todo]);
 
   const handleCreate = (para1, para2) => {
-    setTodo([...todo, { id: id, item: para1, expense: para2 }]);
-    itemRefStore.current.value = "";
-    expenseRefStore.current.value = "";
+    setTodo([...todo, { id: id, title: para1, description: para2 }]);
+    titleRefStore.current.value = "";
+    descriptionRefStore.current.value = "";
   };
 
   const handleUpdate = (id) => {
     todo.map((value) => {
       if (value.id === id) {
-        itemRefStore.current.value = value.item;
-        expenseRefStore.current.value = value.expense;
+        titleRefStore.current.value = value.title;
+        descriptionRefStore.current.value = value.description;
         setTodo(todo.filter((value) => id !== value.id));
       }
-      console.log(todo);
     });
   };
 
@@ -54,8 +53,8 @@ const TodoStore = (props) => {
         handleCreate,
         handleUpdate,
         handleDelete,
-        setItemRefStore,
-        setExpenseRefStore,
+        setTitleRefStore,
+        setDescriptionRefStore,
       }}
     >
       {props.children}

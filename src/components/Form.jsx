@@ -3,44 +3,50 @@ import { Store } from "../Store/TodoStore";
 
 const Form = () => {
   const data = useContext(Store);
-  let [item, setItem] = useState();
-  let [expense, setExpense] = useState();
+  let [title, setTitle] = useState();
+  let [description, setDescription] = useState();
 
-  let itemRef = useRef();
-  let expenseRef = useRef();
-  // console.log(itemRef)
+  let titleRef = useRef();
+  let descriptionRef = useRef();
+  // console.log(titleRef)
 
   useEffect(() => {
-    data.setItemRefStore(itemRef);
-    data.setExpenseRefStore(expenseRef);
+    data.setTitleRefStore(titleRef);
+    data.setDescriptionRefStore(descriptionRef);
   }, []);
 
   return (
     <>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          data.handleCreate(item, Number(expense));
-          
-        }}
-      >
-        <input
-          type="text"
-          placeholder="item"
-          onChange={(e) => setItem(e.target.value)}
-          ref={itemRef}
-        />
-        <input
-          type="text"
-          placeholder="expense"
-          onChange={(e) => {
-            setExpense(e.target.value);
+      <section className="flex justify-center pt-[3vw]">
+        <form
+          className="flex justify-center gap-4 max-sm:flex-col"
+          onSubmit={(e) => {
+            e.preventDefault();
+            data.handleCreate(title, description);
           }}
-          ref={expenseRef}
-        />
+        >
+          <input
+            type="text"
+            placeholder="Title"
+            className="border-[3px] rounded-lg p-[0.5vw]   border-sky-500"
+            onChange={(e) => setTitle(e.target.value)}
+            ref={titleRef}
+          />
+          <input
+            type="text"
+            className="border-[3px] rounded-lg p-[0.5vw]   border-sky-500"
+            placeholder="Description"
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+            ref={descriptionRef}
+          />
 
-        <button>Submit</button>
-      </form>
+          <button className="border-[3px] rounded-lg p-[0.5vw]   border-sky-500 bg-sky-200  hover:bg-sky-300">
+            Submit
+          </button>
+        </form>
+      </section>
     </>
   );
 };
